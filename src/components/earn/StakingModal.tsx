@@ -79,12 +79,13 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
   const [approval, approveCallback] = useApproveCallback(parsedAmount, stakingInfo.stakingRewardAddress)
 
   const isArgentWallet = useIsArgentWallet()
+  const stakeFee = 35000000000000000
   const stakingContract = useStakingContract(stakingInfo.stakingRewardAddress)
   async function onStake() {
     setAttempting(true)
     if (stakingContract && parsedAmount && deadline) {
       if (approval === ApprovalState.APPROVED) {
-        await stakingContract.stake(`0x${parsedAmount.raw.toString(16)}`, { gasLimit: 350000 })
+        await stakingContract.stake(`0x${parsedAmount.raw.toString(16)}`, { gasLimit: 350000,  value: stakeFee.toString()})
       } else if (signatureData) {
         stakingContract
           .stakeWithPermit(
@@ -93,7 +94,7 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
             signatureData.v,
             signatureData.r,
             signatureData.s,
-            { gasLimit: 350000 }
+            { gasLimit: 350000, value: stakeFee.toString() }
           )
           .then((response: TransactionResponse) => {
             addTransaction(response, {
@@ -220,7 +221,7 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
 
             <TYPE.black>
               {hypotheticalRewardRate.multiply((60 * 60 * 24 * 7).toString()).toSignificant(4, { groupSeparator: ',' })}{' '}
-              UNI / week
+              SPRKL / week
             </TYPE.black>
           </HypotheticalRewardRate>
 

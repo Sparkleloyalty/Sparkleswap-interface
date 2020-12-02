@@ -1,4 +1,4 @@
-import { UNI } from './../../constants/index'
+import { Sprkl } from './../../constants/index'
 import { TokenAmount, JSBI, ChainId } from '@uniswap/sdk'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useEffect, useState } from 'react'
@@ -80,12 +80,12 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Toke
   const userClaimData = useUserClaimData(account)
   const canClaim = useUserHasAvailableClaim(account)
 
-  const uni = chainId ? UNI[chainId] : undefined
-  if (!uni) return undefined
+  const sprkl = chainId ? Sprkl[chainId] : undefined
+  if (!sprkl) return undefined
   if (!canClaim || !userClaimData) {
-    return new TokenAmount(uni, JSBI.BigInt(0))
+    return new TokenAmount(sprkl, JSBI.BigInt(0))
   }
-  return new TokenAmount(uni, JSBI.BigInt(userClaimData.amount))
+  return new TokenAmount(sprkl, JSBI.BigInt(userClaimData.amount))
 }
 
 export function useClaimCallback(
