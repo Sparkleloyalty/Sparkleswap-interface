@@ -1,6 +1,6 @@
 import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WETH, Pair } from '@uniswap/sdk'
 import { useMemo } from 'react'
-import {  Sprkl, SPRKL, USDC,  UNI, LINK, AAVE, DAI, COM} from '../../constants'
+import {  Sprkl, SPRKL, USDC, USDT,  UNI, LINK, AAVE, DAI, COM, BASE} from '../../constants'
 import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { useActiveWeb3React } from '../../hooks'
 import { NEVER_RELOAD, useMultipleContractSingleData } from '../multicall/hooks'
@@ -26,6 +26,10 @@ export const STAKING_REWARDS_INFO: {
     {
       tokens: [USDC, SPRKL],
       stakingRewardAddress: '0x066632a982d987e4157e5e216a705629aC945783'
+    },
+    {
+      tokens: [USDT, SPRKL],
+      stakingRewardAddress: '0xbA105B52E79a14E54dBbe9087bCB1649506F942c'
     },   
     {
       tokens: [DAI, SPRKL],
@@ -42,6 +46,10 @@ export const STAKING_REWARDS_INFO: {
     {
       tokens: [LINK, SPRKL],
       stakingRewardAddress: '0xc35320b86874D13BBd322AC983818813D8Ec560D'
+    },
+    {
+      tokens: [BASE, SPRKL],
+      stakingRewardAddress: '0x4495a56EfE2414b3F6516F0732e45bDC8997d109'
     },
     {
       tokens: [COM, SPRKL],

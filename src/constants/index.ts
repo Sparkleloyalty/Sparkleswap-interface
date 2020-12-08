@@ -26,6 +26,7 @@ export const UNI = new Token(ChainId.MAINNET, '0x1f9840a85d5af5bf1d1762f925bdadd
 export const LINK = new Token(ChainId.MAINNET, '0x514910771af9ca656af840dff83e8264ecf986ca', 18, 'LINK', 'Chainlink')
 export const AAVE = new Token(ChainId.MAINNET, '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9', 18, 'AAVE', 'Aave')
 export const COM = new Token(ChainId.MAINNET, '0x1B4052d98fb1888C2Bf3B8d3b930e0aFf8A910dF', 18, 'COM', 'Community Token')
+export const BASE = new Token(ChainId.MAINNET, '0x07150e919b4de5fd6a63de1f9384828396f25fdc', 9, 'BASE', 'Base Protocol')
 
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
