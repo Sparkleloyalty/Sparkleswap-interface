@@ -13,18 +13,18 @@ import { TYPE } from '../../theme'
 import { RowBetween } from '../../components/Row'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 import { ButtonPrimary, ButtonEmpty } from '../../components/Button'
-import StakingModal from '../../components/earn/StakingModal'
-import { useStakingInfo } from '../../state/stake/hooks'
-import UnstakingModal from '../../components/earn/UnstakingModal'
-import ClaimRewardModal from '../../components/earn/ClaimRewardModal'
-import { useTokenBalance } from '../../state/wallet/hooks'
+import StakingModal from '../../components/earn/StakingModal2'
+import { useStakingInfo2 } from '../../state/stake/hooks2'
+import UnstakingModal from '../../components/earn/UnstakingModal2'
+import ClaimRewardModal from '../../components/earn/ClaimRewardModal2'
+import { useTokenBalance } from '../../state/wallet/hooks2'
 import { useActiveWeb3React } from '../../hooks'
 import { useColor } from '../../hooks/useColor'
 import { CountUp } from 'use-count-up'
 
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
 import { currencyId } from '../../utils/currencyId'
-import { useTotalSupply } from '../../data/TotalSupply'
+import { useTotalSupply } from '../../data/TotalSupply2'
 import { usePair } from '../../data/Reserves'
 import usePrevious from '../../hooks/usePrevious'
 import useUSDCPrice from '../../utils/useUSDCPrice'
@@ -49,10 +49,10 @@ const BottomSection = styled(AutoColumn)`
 `
 
 const StyledDataCard = styled(DataCard)<{ bgColor?: any; showBackground?: any }>`
-  background: radial-gradient(76.02% 75.41% at 1.84% 0%,#2c313e 0%,#2c313e 100%)
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%,#2c313e 0%,#2c313e 100%);
   z-index: 2;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  background:radial-gradient(76.02% 75.41% at 1.84% 0%,#2c313e 0%,#2c313e 100%);
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%,#2c313e 0%,#2c313e 100%);
 `
 
 const StyledBottomCard = styled(DataCard)<{ dim: any }>`
@@ -86,7 +86,7 @@ const DataRow = styled(RowBetween)`
   `};
 `
 
-export default function Manage({
+export default function Manage2({
   match: {
     params: { currencyIdA, currencyIdB }
   }
@@ -99,7 +99,7 @@ export default function Manage({
   const tokenB = wrappedCurrency(currencyB ?? undefined, chainId)
 
   const [, stakingTokenPair] = usePair(tokenA, tokenB)
-  const stakingInfo = useStakingInfo(stakingTokenPair)?.[0]
+  const stakingInfo = useStakingInfo2(stakingTokenPair)?.[0]
 
   // detect existing unstaked LP position to show add button if none found
   const userLiquidityUnstaked = useTokenBalance(account ?? undefined, stakingInfo?.stakedAmount?.token)
@@ -181,7 +181,7 @@ export default function Manage({
                     ?.multiply(BIG_INT_SECONDS_IN_WEEK)
                     ?.toFixed(0, { groupSeparator: ',' }) ?? '-'
                 : '0'}
-              {' SPRKL / week'}
+              {' ✨ / week'}
             </TYPE.body>
           </AutoColumn>
         </PoolData>
@@ -265,7 +265,7 @@ export default function Manage({
             <AutoColumn gap="sm">
               <RowBetween>
                 <div>
-                  <TYPE.black>Your unclaimed SPRKL</TYPE.black>
+                  <TYPE.black>Your unclaimed ✨</TYPE.black>
                 </div>
                 {stakingInfo?.earnedAmount && JSBI.notEqual(BIG_INT_ZERO, stakingInfo?.earnedAmount?.raw) && (
                   <ButtonEmpty
@@ -299,7 +299,7 @@ export default function Manage({
                         ?.multiply(BIG_INT_SECONDS_IN_WEEK)
                         ?.toSignificant(4, { groupSeparator: ',' }) ?? '-'
                     : '0'}
-                  {' SPRKL / week'}
+                  {' ✨ / week'}
                 </TYPE.black>
               </RowBetween>
             </AutoColumn>

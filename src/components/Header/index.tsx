@@ -11,7 +11,7 @@ import Logo from '../../assets/svg/logo.svg'
 import LogoDark from '../../assets/svg/logo_white.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
-import { useETHBalances, useAggregateUniBalance } from '../../state/wallet/hooks'
+import { useETHBalances, useAggregateUniBalance } from '../../state/wallet/hooks2'
 import { CardNoise } from '../earn/styled'
 import { CountUp } from 'use-count-up'
 import { TYPE, ExternalLink } from '../../theme'
@@ -24,7 +24,7 @@ import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 import ClaimModal from '../claim/ClaimModal'
 import { useToggleSelfClaimModal, useShowClaimPopup } from '../../state/application/hooks'
-import { useUserHasAvailableClaim } from '../../state/claim/hooks'
+import { useUserHasAvailableClaim } from '../../state/claim/hooks2'
 import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
 import { Dots } from '../swap/styleds'
 import Modal from '../Modal'
@@ -131,7 +131,7 @@ const UNIAmount = styled(AccountElement)`
   height: 36px;
   font-weight: 500;
   background-color: ${({ theme }) => theme.bg3};
-  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #021d43 0%, #17A2B8 100%), #edeef2;
+  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #021d43 0%, 100%), #edeef2;
 `
 
 const UNIWrapper = styled.span`
@@ -308,8 +308,8 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
-          <StyledNavLink id={`stake-nav-link`} to={'/sprkl'}>
-            Staking
+          <StyledNavLink id={`stake-nav-link`} to={'/farm'}>
+            Farm 👨‍🌾
           </StyledNavLink>
           <StyledExternalLink id={`stake-nav-link`} href={'https://info.uniswap.org/token/0x4b7ad3a56810032782afce12d7d27122bdb96eff'}>
             Charts <span style={{ fontSize: '11px' }}>↗</span>
@@ -327,7 +327,7 @@ export default function Header() {
             <UNIWrapper onClick={toggleClaimModal}>
               <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>
                 <TYPE.white padding="0 2px">
-                  {claimTxn && !claimTxn?.receipt ? <Dots>Claiming SPRKL</Dots> : 'Claim SPRKL'}
+                  {claimTxn && !claimTxn?.receipt ? <Dots>Claiming ✨</Dots> : 'Claim SPRKL'}
                 </TYPE.white>
               </UNIAmount>
               <CardNoise />
@@ -354,7 +354,7 @@ export default function Header() {
                     </TYPE.white>
                   </HideSmall>
                 )}
-                Sparkle Quick Info
+                ✨ Token Info
               </UNIAmount>
               <CardNoise />
             </UNIWrapper>

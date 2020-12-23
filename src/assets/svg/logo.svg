@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="318" height="67" viewBox="0 0 318 67">
-  <text id="logo" transform="translate(0 54)" fill="#1caf9a" font-size="50" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">[</tspan><tspan y="0" fill="#707070" font-size="46"> </tspan><tspan y="0" fill="#fff" font-size="42" font-family="SegoeUI-Bold, Segoe UI" font-weight="700">Sparkle</tspan><tspan y="0" fill="#707070" font-size="42" font-family="SegoeUIBlack, Segoe UI" font-weight="400"> </tspan><tspan y="0" fill="#17a2b8" font-size="42" font-family="FiraSans-Bold, Fira Sans" font-weight="700">Swap </tspan><tspan y="0">]</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" width="690" height="129" viewBox="0 0 690 129">
+  <g id="SparkleswapLogo" transform="translate(-919 -1691)">
+    <text id="logo.png" transform="translate(919 1791)" fill="#707070" font-size="86" font-family="SegoeUIEmoji, Segoe UI Emoji"><tspan x="0" y="0">✨</tspan></text>
+    <text id="Sparkleswap" transform="translate(1037 1796)" fill="#fff" font-size="97" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">Sparkleswap</tspan></text>
+  </g>
 </svg>

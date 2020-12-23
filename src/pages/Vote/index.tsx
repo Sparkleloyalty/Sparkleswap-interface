@@ -60,7 +60,7 @@ const ProposalTitle = styled.span`
 `
 
 const VoteCard = styled(DataCard)`
-  background: radial-gradient(76.02% 75.41% at 1.84% 0%, #27ae60 0%, #000000 100%);
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%,#2c313e 0%,#2c313e 100%);
   overflow: hidden;
 `
 

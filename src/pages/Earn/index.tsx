@@ -2,8 +2,10 @@ import React from 'react'
 import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
 import { STAKING_REWARDS_INFO, useStakingInfo } from '../../state/stake/hooks'
+import { STAKING_REWARDS_INFO_2, useStakingInfo2 } from '../../state/stake/hooks2'
 import { TYPE, ExternalLink } from '../../theme'
 import PoolCard from '../../components/earn/PoolCard'
+import PoolCard2 from '../../components/earn/PoolCard2'
 import { RowBetween } from '../../components/Row'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 import { Countdown } from './Countdown'
@@ -43,6 +45,7 @@ export default function Earn() {
 
   // staking info for connected account
   const stakingInfos = useStakingInfo()
+  const stakingInfos2 = useStakingInfo2()
 
   /**
    * only show staking cards with balance
@@ -51,7 +54,7 @@ export default function Earn() {
  // const stakingInfosWithBalance = stakingInfos?.filter(s => JSBI.greaterThan(s.stakedAmount.raw, BIG_INT_ZERO))
 
   // toggle copy if rewards are inactive
-  const stakingRewardsExist = Boolean(typeof chainId === 'number' && (STAKING_REWARDS_INFO[chainId]?.length ?? 0) > 0)
+  const stakingRewardsExist = Boolean(typeof chainId === 'number' && (STAKING_REWARDS_INFO[chainId]?.length ?? 0) > 0 && (STAKING_REWARDS_INFO_2[chainId]?.length ?? 0) > 0)
 
   return (
     <PageWrapper gap="lg" justify="center">
@@ -62,11 +65,21 @@ export default function Earn() {
           <CardSection>
             <AutoColumn gap="md">
               <RowBetween>
-                <TYPE.white fontWeight={600}>Sparkle liquidity mining</TYPE.white>
+                <TYPE.white fontWeight={600}>Welcome to the ✨ farm!</TYPE.white>
               </RowBetween>
               <RowBetween>
                 <TYPE.white fontSize={14}>
-                  Deposit your Liquidity Provider tokens to receive SPRKL, the Sparkle Loyalty token.
+                  1. To get started select the sparkle farm that suits you.
+                </TYPE.white>
+              </RowBetween>{' '}
+              <RowBetween>
+                <TYPE.white fontSize={14}>
+                  2. Deposit your Liquidity Provider tokens to start earning rewards.
+                </TYPE.white>
+              </RowBetween>{' '}
+              <RowBetween>
+                <TYPE.white fontSize={14}>
+                  3. Claim your rewards and enjoy the party!.
                 </TYPE.white>
               </RowBetween>{' '}
               <ExternalLink
@@ -74,7 +87,7 @@ export default function Earn() {
                 href="https://sparkletoken.medium.com/"
                 target="_blank"
               >
-                <TYPE.white fontSize={14}>Read more about SPRKL</TYPE.white>
+                <TYPE.white fontSize={14}>Read more about Sparkleswap.</TYPE.white>
               </ExternalLink>
             </AutoColumn>
           </CardSection>
@@ -88,7 +101,20 @@ export default function Earn() {
           <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>Participating pools</TYPE.mediumHeader>
           <Countdown exactEnd={stakingInfos?.[0]?.periodFinish} />
         </DataRow>
-
+        <TYPE.white fontSize={14}>Deposit UNI-V2 and start farming ✨</TYPE.white>
+        <PoolSection>
+        {stakingRewardsExist && stakingInfos2?.length === 0 ? (
+            <Loader style={{ margin: 'auto' }} />
+          ) : !stakingRewardsExist ? (
+            'No active rewards'
+          ) : (
+            stakingInfos2?.map(stakingInfo => {
+              // need to sort by added liquidity here
+              return <PoolCard2 key={stakingInfo.stakingRewardAddress} stakingInfo={stakingInfo} /> 
+            })
+          )}
+        </PoolSection>
+        <TYPE.white fontSize={14}>Deposit UNI-V2 and start farming SPRKL</TYPE.white>
         <PoolSection>
         {stakingRewardsExist && stakingInfos?.length === 0 ? (
             <Loader style={{ margin: 'auto' }} />

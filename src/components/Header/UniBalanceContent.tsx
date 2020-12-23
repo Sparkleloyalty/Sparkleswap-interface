@@ -3,15 +3,15 @@ import React, { useMemo } from 'react'
 import { X } from 'react-feather'
 import styled from 'styled-components'
 import tokenLogo from '../../assets/images/token-logo.png'
-import { Sprkl } from '../../constants'
-import { useTotalSupply } from '../../data/TotalSupply'
+import { Emoji } from '../../constants/index2'
+import { useTotalSupply } from '../../data/TotalSupply2'
 import { useActiveWeb3React } from '../../hooks'
-import { useMerkleDistributorContract } from '../../hooks/useContract'
+import { useMerkleDistributorContract } from '../../hooks/useContract2'
 import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
 //import { useTotalUniEarned } from '../../state/stake/hooks'
-import { useAggregateUniBalance, useTokenBalance } from '../../state/wallet/hooks'
+import { useAggregateUniBalance, useTokenBalance } from '../../state/wallet/hooks2'
 import { ExternalLink, TYPE, UniTokenAnimated } from '../../theme'
-import { computeUniCirculation } from '../../utils/computeUniCirculation'
+import { computeUniCirculation } from '../../utils/computeUniCirculation2'
 import useUSDCPrice from '../../utils/useUSDCPrice'
 import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
@@ -23,7 +23,7 @@ const ContentWrapper = styled(AutoColumn)`
 
 const ModalUpper = styled(DataCard)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  background: radial-gradient(76.02% 75.41% at 1.84% 0%,#021d43 0%, #17A2B8 100%);
+  background: radial-gradient(174.47% 188.91% at 1.84% 0%,#021d43 0%,100%),#edeef2; 
   padding: 0.5rem;
 `
 
@@ -42,22 +42,22 @@ const StyledClose = styled(X)`
  */
 export default function UniBalanceContent({ setShowUniBalanceModal }: { setShowUniBalanceModal: any }) {
   const { account, chainId } = useActiveWeb3React()
-  const sprkl = chainId ? Sprkl[chainId] : undefined
+  const emoji = chainId ? Emoji[chainId] : undefined
 
   const total = useAggregateUniBalance()
-  const uniBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, sprkl)
+  const uniBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, emoji)
 //const uniToClaim: TokenAmount | undefined = useTotalUniEarned()
 
-  const totalSupply: TokenAmount | undefined = useTotalSupply(sprkl)
-  const uniPrice = useUSDCPrice(sprkl)
+  const totalSupply: TokenAmount | undefined = useTotalSupply(emoji)
+  const uniPrice = useUSDCPrice(emoji)
   const blockTimestamp = useCurrentBlockTimestamp()
-  const unclaimedUni = useTokenBalance(useMerkleDistributorContract()?.address, sprkl)
+  const unclaimedUni = useTokenBalance(useMerkleDistributorContract()?.address, emoji)
   const circulation: TokenAmount | undefined = useMemo(
     () =>
-      blockTimestamp && sprkl && chainId === ChainId.MAINNET
-        ? computeUniCirculation(sprkl, blockTimestamp, unclaimedUni)
+      blockTimestamp && emoji && chainId === ChainId.MAINNET
+        ? computeUniCirculation(emoji, blockTimestamp, unclaimedUni)
         : totalSupply,
-    [blockTimestamp, chainId, totalSupply, unclaimedUni, sprkl]
+    [blockTimestamp, chainId,  unclaimedUni, emoji]
   )
 
   return (
@@ -67,7 +67,7 @@ export default function UniBalanceContent({ setShowUniBalanceModal }: { setShowU
         <CardNoise />
         <CardSection gap="md">
           <RowBetween>
-            <TYPE.white color="white">Your SPRKL Breakdown</TYPE.white>
+            <TYPE.white color="white">Your ✨ Breakdown</TYPE.white> 
             <StyledClose stroke="white" onClick={() => setShowUniBalanceModal(false)} />
           </RowBetween>
         </CardSection>
@@ -94,19 +94,19 @@ export default function UniBalanceContent({ setShowUniBalanceModal }: { setShowU
         <CardSection gap="sm">
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.white color="white">SPRKL price:</TYPE.white>
+              <TYPE.white color="white">✨ price:</TYPE.white>
               <TYPE.white color="white">${uniPrice?.toFixed(2) ?? '-'}</TYPE.white>
             </RowBetween>
             <RowBetween>
-              <TYPE.white color="white">SPRKL in circulation:</TYPE.white>
-              <TYPE.white color="white">{circulation?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
+              <TYPE.white color="white">✨ in circulation:</TYPE.white>
+              <TYPE.white color="white">12,00{circulation?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
             </RowBetween>
             <RowBetween>
               <TYPE.white color="white">Total Supply</TYPE.white>
               <TYPE.white color="white">{totalSupply?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
             </RowBetween>
-            {sprkl && sprkl.chainId === ChainId.MAINNET ? (
-              <ExternalLink href={`https://uniswap.info/token/${sprkl.address}`}>View SPRKL Analytics</ExternalLink>
+            {emoji && emoji.chainId === ChainId.MAINNET ? (
+              <ExternalLink href={`https://uniswap.info/token/${emoji.address}`}>View Token Analytics</ExternalLink>
             ) : null}
           </AutoColumn>
         </CardSection>

@@ -6,12 +6,12 @@ import { TYPE, StyledInternalLink } from '../../theme'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { ETHER, JSBI, TokenAmount } from '@uniswap/sdk'
 import { ButtonPrimary } from '../Button'
-import { StakingInfo } from '../../state/stake/hooks'
+import { StakingInfo } from '../../state/stake/hooks2'
 import { useColor } from '../../hooks/useColor'
 import { currencyId } from '../../utils/currencyId'
 import { Break, CardNoise, CardBGImage } from './styled'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { useTotalSupply } from '../../data/TotalSupply'
+import { useTotalSupply } from '../../data/TotalSupply2'
 import { usePair } from '../../data/Reserves'
 import useUSDCPrice from '../../utils/useUSDCPrice'
 import { BIG_INT_SECONDS_IN_WEEK } from '../../constants'
@@ -67,7 +67,7 @@ const BottomSection = styled.div<{ showBackground: boolean }>`
   z-index: 1;
 `
 
-export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) {
+export default function PoolCard2({ stakingInfo }: { stakingInfo: StakingInfo }) {
   const token0 = stakingInfo.tokens[0]
   const token1 = stakingInfo.tokens[1]
 
@@ -116,7 +116,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
           {currency0.symbol}-{currency1.symbol}
         </TYPE.white>
 
-        <StyledInternalLink to={`/farm/sprkl/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
+        <StyledInternalLink to={`/farm/✨/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
           <ButtonPrimary padding="8px" borderRadius="8px">
             {isStaking ? 'Manage' : 'Deposit'}
           </ButtonPrimary>
@@ -139,8 +139,8 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
               ? stakingInfo.active
                 ? `${stakingInfo.totalRewardRate
                     ?.multiply(BIG_INT_SECONDS_IN_WEEK)
-                    ?.toFixed(0, { groupSeparator: ',' })} SPRKL / week`
-                : '0 SPRKL / week'
+                    ?.toFixed(0, { groupSeparator: ',' })} ✨ / week`
+                : '0 ✨ / week'
               : '-'}
           </TYPE.white>
         </RowBetween>
@@ -162,8 +162,8 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
                 ? stakingInfo.active
                   ? `${stakingInfo.rewardRate
                       ?.multiply(BIG_INT_SECONDS_IN_WEEK)
-                      ?.toSignificant(4, { groupSeparator: ',' })} SPRKL / week`
-                  : '0 SPRKL / week'
+                      ?.toSignificant(4, { groupSeparator: ',' })} ✨ / week`
+                  : '0 ✨ / week'
                 : '-'}
             </TYPE.black>
           </BottomSection>
