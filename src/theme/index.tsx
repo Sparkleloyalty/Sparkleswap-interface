@@ -60,7 +60,7 @@ export function colors(darkMode: boolean): Colors {
 
     //primary colors
     primary1: darkMode ? '#2172E5' : '#f786c4',
-    primary2: darkMode ? '#3680E7' : '#3680E7',
+    primary2: darkMode ? '#3680E7' : '#f786c4',
     primary3: darkMode ? '#4D8FEA' : '#4D8FEA',
     primary4: darkMode ? '#376bad70' : '#376bad70',
     primary5: darkMode ? '#153d6f70' : '#40444F',
@@ -70,8 +70,8 @@ export function colors(darkMode: boolean): Colors {
 
     // secondary colors
     secondary1: darkMode ? '#2172E5' : '#f786c4', 
-    secondary2: darkMode ? '#17000b26' : '#17000b26',
-    secondary3: darkMode ? '#17000b26' : '#17000b26',
+    secondary2: darkMode ? '#17000b26' : '#f786c4',
+    secondary3: darkMode ? '#17000b26' : '#f786c4',
 
     // other
     red1: '#FF6871',

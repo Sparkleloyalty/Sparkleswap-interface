@@ -1,0 +1,30 @@
+{
+    "name": "Sparkleswap",
+    "logoURI": "https://umaproject.org/assets/images/UMA_square_red_logo_circle.png",
+    "keywords": ["defi", "sparkleswap", "uniswap","yield"],
+    "timestamp": "2020-11-23T01:40:34.305Z",
+    "tokens": [
+      {
+        "chainId": 1,
+        "address": "0x04fa0d235c4abf4bcf4787af4cf447de572ef828",
+        "name": "Sparkleswap Rewards Token",
+        "symbol": "✨",
+        "decimals": 18
+      },
+      {
+        "chainId": 1,
+        "address": "0x81ab848898b5ffD3354dbbEfb333D5D183eEDcB5",
+        "name": "Uniswap Rewards Token",
+        "symbol": "🦄",
+        "decimals": 18
+      },
+      {
+        "chainId": 1,
+        "address": "0x81ab848898b5ffD3354dbbEfb333D5D183eEDcB5",
+        "name": "Sparkle Loyalty Token",
+        "symbol": "SPRKL",
+        "decimals": 8
+      }
+    ],
+    "version": { "major": 0, "minor": 0, "patch": 0 }
+  }
