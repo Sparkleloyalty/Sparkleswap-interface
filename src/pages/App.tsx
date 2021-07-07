@@ -20,6 +20,9 @@ import {
 import Earn from './Earn'
 import Manage from './Earn/Manage'
 import Manage2 from './Earn/Manage2'
+import Manage3 from './Earn/Manage3'
+import Manage4 from './Earn/Manage4'
+import Manage5 from './Earn/Manage5'
 import MigrateV1 from './MigrateV1'
 import MigrateV1Exchange from './MigrateV1/MigrateV1Exchange'
 import RemoveV1Exchange from './MigrateV1/RemoveV1Exchange'
@@ -113,6 +116,9 @@ export default function App() {
               <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
               <Route exact strict path="/farm/sprkl/:currencyIdA/:currencyIdB" component={Manage} />
               <Route exact strict path="/farm/✨/:currencyIdA/:currencyIdB" component={Manage2} />
+              <Route exact strict path="/farm/🦄/:currencyIdA/:currencyIdB" component={Manage3} />
+              <Route exact strict path="/farm/⛽/:currencyIdA/:currencyIdB" component={Manage4} />
+              <Route exact strict path="/farm/💸/:currencyIdA/:currencyIdB" component={Manage5} />
               <Route exact strict path="/vote/:id" component={VotePage} />
               <Route component={RedirectPathToSwapOnly} />
             </Switch>

@@ -24,7 +24,7 @@ export const SPRKL = new Token(ChainId.MAINNET, '0x4b7ad3a56810032782afce12d7d27
 // Additional Currencies
 export const EMOJI = new Token(ChainId.MAINNET, '0xa3a7cba479df86c7f866280b90ebc3b25f2371f0', 18, '✨', 'Sparkleswap Rewards Token')
 export const UNICORN = new Token(ChainId.MAINNET, '0xe62174753ea3275f65f4cf980dc002fea7887ea8', 18, '🦄', 'Unicorns')
-export const GASSTATION = new Token(ChainId.MAINNET, '0x81ab848898b5ffD3354dbbEfb333D5D183eEDcB5', 18, '⛽', 'Gas Station')
+export const GASSTATION = new Token(ChainId.MAINNET, '0xd16b28bedffc06af59085524c88415f7929b8183', 18, '⛽', 'Gas Station')
 export const WING = new Token(ChainId.MAINNET, '0x05f3a6ccbd28cbaddd971d134ee52922b09f0fd2', 18, '💸', 'Wing Money')
 export const UNI = new Token(ChainId.MAINNET, '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', 18, 'UNI', 'Uniswap')
 export const LINK = new Token(ChainId.MAINNET, '0x514910771af9ca656af840dff83e8264ecf986ca', 18, 'LINK', 'Chainlink')
@@ -42,17 +42,17 @@ export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
 
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
-const UNI_ADDRESS = '0xa3a7cba479df86c7f866280b90ebc3b25f2371f0'
-export const Emoji: { [chainId in ChainId]: Token } = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
-  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
-  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
-  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
-  [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token')
+const UNI_ADDRESS = '0xd16b28bedffc06af59085524c88415f7929b8183'
+export const Gasstation: { [chainId in ChainId]: Token } = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, UNI_ADDRESS, 18, '⛽', 'Gas Station'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, UNI_ADDRESS, 18, '⛽', 'Gas Station'),
+  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS, 18, '⛽', 'Gas Station'),
+  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, UNI_ADDRESS, 18, '⛽', 'Gas Station'),
+  [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, '⛽', 'Gas Station')
 }
 
 export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
-  [UNI_ADDRESS]: '✨',
+  [UNI_ADDRESS]: '⛽',
   [GOVERNANCE_ADDRESS]: 'Governance',
   [TIMELOCK_ADDRESS]: 'Timelock'
 }

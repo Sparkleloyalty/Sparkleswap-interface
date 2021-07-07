@@ -13,18 +13,18 @@ import { TYPE } from '../../theme'
 import { RowBetween } from '../../components/Row'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 import { ButtonPrimary, ButtonEmpty } from '../../components/Button'
-import StakingModal from '../../components/earn/StakingModal2'
-import { useStakingInfo2 } from '../../state/stake/hooks2'
-import UnstakingModal from '../../components/earn/UnstakingModal2'
-import ClaimRewardModal from '../../components/earn/ClaimRewardModal2'
-import { useTokenBalance } from '../../state/wallet/hooks2'
+import StakingModal from '../../components/earn/StakingModal5'
+import { useStakingInfo5 } from '../../state/stake/hooks5'
+import UnstakingModal from '../../components/earn/UnstakingModal5'
+import ClaimRewardModal from '../../components/earn/ClaimRewardModal5'
+import { useTokenBalance } from '../../state/wallet/hooks5'
 import { useActiveWeb3React } from '../../hooks'
 import { useColor } from '../../hooks/useColor'
 import { CountUp } from 'use-count-up'
 
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
 import { currencyId } from '../../utils/currencyId'
-import { useTotalSupply } from '../../data/TotalSupply2'
+import { useTotalSupply } from '../../data/TotalSupply5'
 import { usePair } from '../../data/Reserves'
 import usePrevious from '../../hooks/usePrevious'
 import useUSDCPrice from '../../utils/useUSDCPrice'
@@ -86,7 +86,7 @@ const DataRow = styled(RowBetween)`
   `};
 `
 
-export default function Manage2({
+export default function Manage5({
   match: {
     params: { currencyIdA, currencyIdB }
   }
@@ -99,7 +99,7 @@ export default function Manage2({
   const tokenB = wrappedCurrency(currencyB ?? undefined, chainId)
 
   const [, stakingTokenPair] = usePair(tokenA, tokenB)
-  const stakingInfo = useStakingInfo2(stakingTokenPair)?.[0]
+  const stakingInfo = useStakingInfo5(stakingTokenPair)?.[0]
 
   // detect existing unstaked LP position to show add button if none found
   const userLiquidityUnstaked = useTokenBalance(account ?? undefined, stakingInfo?.stakedAmount?.token)
@@ -181,7 +181,7 @@ export default function Manage2({
                     ?.multiply(BIG_INT_SECONDS_IN_WEEK)
                     ?.toFixed(0, { groupSeparator: ',' }) ?? '-'
                 : '0'}
-              {' ✨ / week'}
+              {' 💸 / week'}
             </TYPE.body>
           </AutoColumn>
         </PoolData>
@@ -265,7 +265,7 @@ export default function Manage2({
             <AutoColumn gap="sm">
               <RowBetween>
                 <div>
-                  <TYPE.black>Your unclaimed ✨</TYPE.black>
+                  <TYPE.black>Your unclaimed 💸</TYPE.black>
                 </div>
                 {stakingInfo?.earnedAmount && JSBI.notEqual(BIG_INT_ZERO, stakingInfo?.earnedAmount?.raw) && (
                   <ButtonEmpty
@@ -299,7 +299,7 @@ export default function Manage2({
                         ?.multiply(BIG_INT_SECONDS_IN_WEEK)
                         ?.toSignificant(4, { groupSeparator: ',' }) ?? '-'
                     : '0'}
-                  {' ✨ / week'}
+                  {' 💸 / week'}
                 </TYPE.black>
               </RowBetween>
             </AutoColumn>
@@ -309,7 +309,7 @@ export default function Manage2({
           <span role="img" aria-label="wizard-icon" style={{ marginRight: '8px' }}>
             ⭐️
           </span>
-          When you withdraw, the contract will automagically claim ✨ on your behalf!
+          When you withdraw, the contract will automagically claim 💸 on your behalf!
         </TYPE.main>
 
         {!showAddLiquidityButton && (

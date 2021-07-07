@@ -1,7 +1,8 @@
 import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WETH, Pair } from '@uniswap/sdk'
 import { useMemo } from 'react'
-import {  Sprkl, SPRKL, USDC, USDT,  UNI, LINK, AAVE, DAI, COM, BASE, EMOJI} from '../../constants'
-import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
+import { WING, Wing} from '../../constants/index5'
+import { STAKING_REWARDS_INTERFACE_5 } from '../../constants/abis/staking-rewards5'
+// import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { useActiveWeb3React } from '../../hooks'
 import { NEVER_RELOAD, useMultipleContractSingleData } from '../multicall/hooks'
 import { tryParseAmount } from '../swap/hooks'
@@ -12,7 +13,7 @@ export const STAKING_GENESIS = 1624384800
 export const REWARDS_DURATION_DAYS = 90
 
 // TODO add staking rewards addresses here
-export const STAKING_REWARDS_INFO: {
+export const STAKING_REWARDS_INFO_5: {
   [chainId in ChainId]?: {
     tokens: [Token, Token]
     stakingRewardAddress: string
@@ -20,44 +21,8 @@ export const STAKING_REWARDS_INFO: {
 } = {
   [ChainId.MAINNET]: [
     {
-      tokens: [EMOJI, WETH[ChainId.MAINNET]],
-      stakingRewardAddress: '0xe75150A9781847811EA60269d1aac482f6BBeB5C'
-    },
-    {
-      tokens: [WETH[ChainId.MAINNET], SPRKL],
-      stakingRewardAddress: '0xF04Ac5Cb78a8e3e28548EF8b46740E014B7648b3'
-    },
-    {
-      tokens: [USDC, SPRKL],
-      stakingRewardAddress: '0x066632a982d987e4157e5e216a705629aC945783'
-    },
-    {
-      tokens: [USDT, SPRKL],
-      stakingRewardAddress: '0xbA105B52E79a14E54dBbe9087bCB1649506F942c'
-    },   
-    {
-      tokens: [DAI, SPRKL],
-      stakingRewardAddress: '0x367533f54E1479419485C84C1821BD4c5495b6AE'
-    },
-    {
-      tokens: [UNI, SPRKL],
-      stakingRewardAddress: '0x1a059741a7ECAb9FA46E4A2bA6aE06cf1c2B63DB'
-    },
-    {
-      tokens: [AAVE, SPRKL],
-      stakingRewardAddress: '0xa02D7d4066C9C21f3bC2F87D284320a50CEEa0fc'
-    },
-    {
-      tokens: [LINK, SPRKL],
-      stakingRewardAddress: '0xc35320b86874D13BBd322AC983818813D8Ec560D'
-    },
-    {
-      tokens: [BASE, SPRKL],
-      stakingRewardAddress: '0x4495a56EfE2414b3F6516F0732e45bDC8997d109'
-    },
-    {
-      tokens: [COM, SPRKL],
-      stakingRewardAddress: '0x424f7E5cAfa1F400b60F25116D7fb81D1f1A8f0b'
+      tokens: [WING, WETH[ChainId.MAINNET]],
+      stakingRewardAddress: '0x48DE14Ff9977D15fbB93012C2E8662650F9999e2'
     }
   ]
 }
@@ -94,7 +59,7 @@ export interface StakingInfo {
 }
 
 // gets the staking info from the network for the active chain id
-export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
+export function useStakingInfo5(pairToFilterBy?: Pair | null): StakingInfo[] {
   const { chainId, account } = useActiveWeb3React()
 
   // detect if staking is ended
@@ -103,7 +68,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
   const info = useMemo(
     () =>
       chainId
-        ? STAKING_REWARDS_INFO[chainId]?.filter(stakingRewardInfo =>
+        ? STAKING_REWARDS_INFO_5[chainId]?.filter(stakingRewardInfo =>
             pairToFilterBy === undefined
               ? true
               : pairToFilterBy === null
@@ -115,35 +80,35 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
     [chainId, pairToFilterBy]
   )
 
-  const sprkl = chainId ? Sprkl[chainId] : undefined
+  const wing = chainId ? Wing[chainId] : undefined
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
 
   const accountArg = useMemo(() => [account ?? undefined], [account])
 
   // get all the info from the staking rewards contracts
-  const balances = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'balanceOf', accountArg)
-  const earnedAmounts = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'earned', accountArg)
-  const totalSupplies = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'totalSupply')
+  const balances = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE_5, 'balanceOf', accountArg)
+  const earnedAmounts = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE_5, 'earned', accountArg)
+  const totalSupplies = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE_5, 'totalSupply')
 
   // tokens per second, constants
   const rewardRates = useMultipleContractSingleData(
     rewardsAddresses,
-    STAKING_REWARDS_INTERFACE,
+    STAKING_REWARDS_INTERFACE_5,
     'rewardRate',
     undefined,
     NEVER_RELOAD
   )
   const periodFinishes = useMultipleContractSingleData(
     rewardsAddresses,
-    STAKING_REWARDS_INTERFACE,
+    STAKING_REWARDS_INTERFACE_5,
     'periodFinish',
     undefined,
     NEVER_RELOAD
   )
 
   return useMemo(() => {
-    if (!chainId || !sprkl) return []
+    if (!chainId || !wing) return []
 
     return rewardsAddresses.reduce<StakingInfo[]>((memo, rewardsAddress, index) => {
       // these two are dependent on account
@@ -186,7 +151,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
 
         const stakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(balanceState?.result?.[0] ?? 0))
         const totalStakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(totalSupplyState.result?.[0]))
-        const totalRewardRate = new TokenAmount(sprkl, JSBI.BigInt(rewardRateState.result?.[0]))
+        const totalRewardRate = new TokenAmount(wing, JSBI.BigInt(rewardRateState.result?.[0]))
 
         const getHypotheticalRewardRate = (
           stakedAmount: TokenAmount,
@@ -194,7 +159,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
           totalRewardRate: TokenAmount
         ): TokenAmount => {
           return new TokenAmount(
-            sprkl,
+            wing,
             JSBI.greaterThan(totalStakedAmount.raw, JSBI.BigInt(0))
               ? JSBI.divide(JSBI.multiply(totalRewardRate.raw, stakedAmount.raw), totalStakedAmount.raw)
               : JSBI.BigInt(0)
@@ -215,7 +180,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
           stakingRewardAddress: rewardsAddress,
           tokens: info[index].tokens,
           periodFinish: periodFinishMs > 0 ? new Date(periodFinishMs) : undefined,
-          earnedAmount: new TokenAmount(sprkl, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
+          earnedAmount: new TokenAmount(wing, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
           rewardRate: individualRewardRate,
           totalRewardRate: totalRewardRate,
           stakedAmount: stakedAmount,
@@ -236,24 +201,24 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
     rewardRates,
     rewardsAddresses,
     totalSupplies,
-    sprkl
+    wing
   ])
 }
 
 export function useTotalUniEarned(): TokenAmount | undefined {
   const { chainId } = useActiveWeb3React()
-  const sprkl = chainId ? Sprkl[chainId] : undefined
-  const stakingInfos = useStakingInfo()
+  const wing = chainId ? Wing[chainId] : undefined
+  const stakingInfos = useStakingInfo5()
 
   return useMemo(() => {
-    if (!sprkl) return undefined
+    if (!wing) return undefined
     return (
       stakingInfos?.reduce(
         (accumulator, stakingInfo) => accumulator.add(stakingInfo.earnedAmount),
-        new TokenAmount(sprkl, '0')
-      ) ?? new TokenAmount(sprkl, '0')
+        new TokenAmount(wing, '0')
+      ) ?? new TokenAmount(wing, '0')
     )
-  }, [stakingInfos, sprkl])
+  }, [stakingInfos, wing])
 }
 
 // based on typed value

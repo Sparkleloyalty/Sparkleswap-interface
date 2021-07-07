@@ -8,9 +8,9 @@ import { NEVER_RELOAD, useMultipleContractSingleData } from '../multicall/hooks'
 import { tryParseAmount } from '../swap/hooks'
 import useCurrentBlockTimestamp from 'hooks/useCurrentBlockTimestamp'
  
-export const STAKING_GENESIS = 1607083200
+export const STAKING_GENESIS = 1624384800
 
-export const REWARDS_DURATION_DAYS = 120
+export const REWARDS_DURATION_DAYS = 90
 
 // TODO add staking rewards addresses here
 export const STAKING_REWARDS_INFO_2: {
@@ -22,7 +22,7 @@ export const STAKING_REWARDS_INFO_2: {
   [ChainId.MAINNET]: [
     {
       tokens: [EMOJI, WETH[ChainId.MAINNET]],
-      stakingRewardAddress: '0x5d02c47608654B5C795b081FA267fFE85e564987'
+      stakingRewardAddress: '0x1D5044503533F5c6e856CA05F679CC28fe17D7fa'
     }
   ]
 }

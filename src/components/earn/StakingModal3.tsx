@@ -12,10 +12,10 @@ import CurrencyInputPanel from '../CurrencyInputPanel'
 import { TokenAmount, Pair } from '@uniswap/sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
-import { usePairContract, useStakingContract } from '../../hooks/useContract2'
+import { usePairContract, useStakingContract } from '../../hooks/useContract3'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
 import { splitSignature } from 'ethers/lib/utils'
-import { StakingInfo, useDerivedStakeInfo } from '../../state/stake/hooks2'
+import { StakingInfo, useDerivedStakeInfo } from '../../state/stake/hooks3'
 import { wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -221,7 +221,7 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
 
             <TYPE.black>
               {hypotheticalRewardRate.multiply((60 * 60 * 24 * 7).toString()).toSignificant(4, { groupSeparator: ',' })}{' '}
-              ✨ / week
+              🦄 / week
             </TYPE.black>
           </HypotheticalRewardRate>
 
