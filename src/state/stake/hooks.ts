@@ -1,6 +1,6 @@
 import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WETH, Pair } from '@uniswap/sdk'
 import { useMemo } from 'react'
-import {  Sprkl, SPRKL, USDC, USDT,  UNI, LINK, AAVE, DAI, COM, BASE, EMOJI} from '../../constants'
+import { EMOJI, Emoji} from '../../constants/index2'
 import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { useActiveWeb3React } from '../../hooks'
 import { NEVER_RELOAD, useMultipleContractSingleData } from '../multicall/hooks'
@@ -22,42 +22,6 @@ export const STAKING_REWARDS_INFO: {
     {
       tokens: [EMOJI, WETH[ChainId.MAINNET]],
       stakingRewardAddress: '0xe75150A9781847811EA60269d1aac482f6BBeB5C'
-    },
-    {
-      tokens: [WETH[ChainId.MAINNET], SPRKL],
-      stakingRewardAddress: '0xF04Ac5Cb78a8e3e28548EF8b46740E014B7648b3'
-    },
-    {
-      tokens: [USDC, SPRKL],
-      stakingRewardAddress: '0x066632a982d987e4157e5e216a705629aC945783'
-    },
-    {
-      tokens: [USDT, SPRKL],
-      stakingRewardAddress: '0xbA105B52E79a14E54dBbe9087bCB1649506F942c'
-    },   
-    {
-      tokens: [DAI, SPRKL],
-      stakingRewardAddress: '0x367533f54E1479419485C84C1821BD4c5495b6AE'
-    },
-    {
-      tokens: [UNI, SPRKL],
-      stakingRewardAddress: '0x1a059741a7ECAb9FA46E4A2bA6aE06cf1c2B63DB'
-    },
-    {
-      tokens: [AAVE, SPRKL],
-      stakingRewardAddress: '0xa02D7d4066C9C21f3bC2F87D284320a50CEEa0fc'
-    },
-    {
-      tokens: [LINK, SPRKL],
-      stakingRewardAddress: '0xc35320b86874D13BBd322AC983818813D8Ec560D'
-    },
-    {
-      tokens: [BASE, SPRKL],
-      stakingRewardAddress: '0x4495a56EfE2414b3F6516F0732e45bDC8997d109'
-    },
-    {
-      tokens: [COM, SPRKL],
-      stakingRewardAddress: '0x424f7E5cAfa1F400b60F25116D7fb81D1f1A8f0b'
     }
   ]
 }
@@ -115,7 +79,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
     [chainId, pairToFilterBy]
   )
 
-  const sprkl = chainId ? Sprkl[chainId] : undefined
+  const emoji = chainId ? Emoji[chainId] : undefined
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
 
@@ -143,7 +107,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
   )
 
   return useMemo(() => {
-    if (!chainId || !sprkl) return []
+    if (!chainId || !emoji) return []
 
     return rewardsAddresses.reduce<StakingInfo[]>((memo, rewardsAddress, index) => {
       // these two are dependent on account
@@ -186,7 +150,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
 
         const stakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(balanceState?.result?.[0] ?? 0))
         const totalStakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(totalSupplyState.result?.[0]))
-        const totalRewardRate = new TokenAmount(sprkl, JSBI.BigInt(rewardRateState.result?.[0]))
+        const totalRewardRate = new TokenAmount(emoji, JSBI.BigInt(rewardRateState.result?.[0]))
 
         const getHypotheticalRewardRate = (
           stakedAmount: TokenAmount,
@@ -194,7 +158,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
           totalRewardRate: TokenAmount
         ): TokenAmount => {
           return new TokenAmount(
-            sprkl,
+            emoji,
             JSBI.greaterThan(totalStakedAmount.raw, JSBI.BigInt(0))
               ? JSBI.divide(JSBI.multiply(totalRewardRate.raw, stakedAmount.raw), totalStakedAmount.raw)
               : JSBI.BigInt(0)
@@ -215,7 +179,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
           stakingRewardAddress: rewardsAddress,
           tokens: info[index].tokens,
           periodFinish: periodFinishMs > 0 ? new Date(periodFinishMs) : undefined,
-          earnedAmount: new TokenAmount(sprkl, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
+          earnedAmount: new TokenAmount(emoji, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
           rewardRate: individualRewardRate,
           totalRewardRate: totalRewardRate,
           stakedAmount: stakedAmount,
@@ -236,24 +200,24 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
     rewardRates,
     rewardsAddresses,
     totalSupplies,
-    sprkl
+    emoji
   ])
 }
 
 export function useTotalUniEarned(): TokenAmount | undefined {
   const { chainId } = useActiveWeb3React()
-  const sprkl = chainId ? Sprkl[chainId] : undefined
+  const emoji = chainId ? Emoji[chainId] : undefined
   const stakingInfos = useStakingInfo()
 
   return useMemo(() => {
-    if (!sprkl) return undefined
+    if (!emoji) return undefined
     return (
       stakingInfos?.reduce(
         (accumulator, stakingInfo) => accumulator.add(stakingInfo.earnedAmount),
-        new TokenAmount(sprkl, '0')
-      ) ?? new TokenAmount(sprkl, '0')
+        new TokenAmount(emoji, '0')
+      ) ?? new TokenAmount(emoji, '0')
     )
-  }, [stakingInfos, sprkl])
+  }, [stakingInfos, emoji])
 }
 
 // based on typed value

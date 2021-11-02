@@ -1,4 +1,4 @@
-import { Sprkl } from './../../constants/index'
+import { Emoji } from './../../constants/index'
 import { TokenAmount } from '@uniswap/sdk'
 import { isAddress } from 'ethers/lib/utils'
 import { useGovernanceContract, useUniContract } from '../../hooks/useContract'
@@ -159,9 +159,9 @@ export function useUserVotes(): TokenAmount | undefined {
   const uniContract = useUniContract()
 
   // check for available votes
-  const sprkl = chainId ? Sprkl[chainId] : undefined
+  const emoji = chainId ? Emoji[chainId] : undefined
   const votes = useSingleCallResult(uniContract, 'getCurrentVotes', [account ?? undefined])?.result?.[0]
-  return votes && sprkl ? new TokenAmount(sprkl, votes) : undefined
+  return votes && emoji ? new TokenAmount(emoji, votes) : undefined
 }
 
 // fetch available votes as of block (usually proposal start block)
@@ -170,10 +170,10 @@ export function useUserVotesAsOfBlock(block: number | undefined): TokenAmount | 
   const uniContract = useUniContract()
 
   // check for available votes
-  const sprkl = chainId ? Sprkl[chainId] : undefined
+  const emoji = chainId ? Emoji[chainId] : undefined
   const votes = useSingleCallResult(uniContract, 'getPriorVotes', [account ?? undefined, block ?? undefined])
     ?.result?.[0]
-  return votes && sprkl ? new TokenAmount(sprkl, votes) : undefined
+  return votes && emoji ? new TokenAmount(emoji, votes) : undefined
 }
 
 export function useDelegateCallback(): (delegatee: string | undefined) => undefined | Promise<string> {

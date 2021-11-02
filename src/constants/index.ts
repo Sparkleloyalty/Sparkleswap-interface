@@ -3,7 +3,9 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
-export const ROUTER_ADDRESS = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+export const ROUTER_ADDRESS = '0x691a269751ee4ef10ed3de20efeb632e2983d810'
+export const ROUTER_ADDRESS_2 = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -26,11 +28,11 @@ export const EMOJI = new Token(ChainId.MAINNET, '0xa3a7cba479df86c7f866280b90ebc
 export const UNICORN = new Token(ChainId.MAINNET, '0xe62174753ea3275f65f4cf980dc002fea7887ea8', 18, '🦄', 'Unicorns')
 export const GASSTATION = new Token(ChainId.MAINNET, '0x81ab848898b5ffD3354dbbEfb333D5D183eEDcB5', 18, '⛽', 'Gas Station')
 export const WING = new Token(ChainId.MAINNET, '0x05f3a6ccbd28cbaddd971d134ee52922b09f0fd2', 18, '💸', 'Wing Money')
-export const UNI = new Token(ChainId.MAINNET, '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', 18, 'UNI', 'Uniswap')
-export const LINK = new Token(ChainId.MAINNET, '0x514910771af9ca656af840dff83e8264ecf986ca', 18, 'LINK', 'Chainlink')
-export const AAVE = new Token(ChainId.MAINNET, '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9', 18, 'AAVE', 'Aave')
-export const COM = new Token(ChainId.MAINNET, '0x1B4052d98fb1888C2Bf3B8d3b930e0aFf8A910dF', 18, 'COM', 'Community Token')
-export const BASE = new Token(ChainId.MAINNET, '0x07150e919b4de5fd6a63de1f9384828396f25fdc', 9, 'BASE', 'Base Protocol')
+//export const UNI = new Token(ChainId.MAINNET, '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', 18, 'UNI', 'Uniswap')
+//export const LINK = new Token(ChainId.MAINNET, '0x514910771af9ca656af840dff83e8264ecf986ca', 18, 'LINK', 'Chainlink')
+//export const AAVE = new Token(ChainId.MAINNET, '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9', 18, 'AAVE', 'Aave')
+//export const COM = new Token(ChainId.MAINNET, '0x1B4052d98fb1888C2Bf3B8d3b930e0aFf8A910dF', 18, 'COM', 'Community Token')
+//export const BASE = new Token(ChainId.MAINNET, '0x07150e919b4de5fd6a63de1f9384828396f25fdc', 9, 'BASE', 'Base Protocol')
 
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
@@ -42,17 +44,18 @@ export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
 
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
-const UNI_ADDRESS = '0x4b7ad3a56810032782afce12d7d27122bdb96eff'
-export const Sprkl: { [chainId in ChainId]: Token } = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, UNI_ADDRESS, 8, 'SPRKL', 'Sparkle'),
-  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, UNI_ADDRESS, 8, 'SPRKL', 'Sparkle'),
-  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS, 8, 'SPRKL', 'Sparkle'),
-  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, UNI_ADDRESS, 8, 'SPRKL', 'Sparkle'),
-  [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 8, 'SPRKL', 'Sparkle')
+const UNI_ADDRESS = '0xa3a7cba479df86c7f866280b90ebc3b25f2371f0'
+export const Emoji: { [chainId in ChainId]: Token } = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
+  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
+  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token'),
+  [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, '✨', 'Sparkleswap Rewards Token')
 }
 
+
 export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
-  [UNI_ADDRESS]: 'SPRKL',
+  [UNI_ADDRESS]: '✨',
   [GOVERNANCE_ADDRESS]: 'Governance',
   [TIMELOCK_ADDRESS]: 'Timelock'
 }
@@ -73,7 +76,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], EMOJI ]
 }
 
 /**
@@ -89,13 +92,13 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], EMOJI]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], EMOJI]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {

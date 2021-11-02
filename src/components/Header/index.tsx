@@ -327,7 +327,7 @@ export default function Header() {
             <UNIWrapper onClick={toggleClaimModal}>
               <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>
                 <TYPE.white padding="0 2px">
-                  {claimTxn && !claimTxn?.receipt ? <Dots>Claiming ✨</Dots> : 'Claim SPRKL'}
+                  {claimTxn && !claimTxn?.receipt ? <Dots>Claiming ✨</Dots> : 'Claim Emoji'}
                 </TYPE.white>
               </UNIAmount>
               <CardNoise />
